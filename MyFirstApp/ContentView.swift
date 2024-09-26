@@ -13,6 +13,7 @@ struct ContentView: View {
 
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
+    @State var count = 0
 
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
@@ -23,10 +24,23 @@ struct ContentView: View {
                 .padding(.bottom, 50)
 
             Text("Hello, world!")
+                .offset(z: 100)
 
             Toggle("Show Immersive Space", isOn: $showImmersiveSpace)
-                .toggleStyle(.button)
-                .padding(.top, 50)
+                .font(.title)
+                .frame(width: 360)
+                .padding(24)
+                .glassBackgroundEffect()
+            
+            HStack {
+                Button("➖") {
+                    count -= 1
+                }
+                Text("\(count)")
+                Button("➕") {
+                    count += 1
+                }
+            }.padding()
         }
         .padding()
         .onChange(of: showImmersiveSpace) { _, newValue in
